@@ -1,0 +1,99 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>LumiSoft.Net, Xianyi Cui</Authors>
+    <Company>LumiSoft.Net</Company>
+    <Product>LumiSoft.Net</Product>
+    <Description>Modified from LumiSoft.Net source code.</Description>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0</Version>
+    <AssemblyName>LumiSoft.Net</AssemblyName>
+    <RootNamespace>LumiSoft.Net</RootNamespace>
+    <PackageId>Xycui.LumiSoft.Net</PackageId>
+    <PackageTags>LumiSoft, Sip</PackageTags>
+    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>LumiSoft.Net.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;0414</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>LumiSoft.Net.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;0414</NoWarn>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ABNF\ABFN.cs" />
+    <Compile Remove="ABNF\ABFN_Group.cs" />
+    <Compile Remove="ABNF\ABNF_Alternation.cs" />
+    <Compile Remove="ABNF\ABNF_BinVal.cs" />
+    <Compile Remove="ABNF\ABNF_CharVal.cs" />
+    <Compile Remove="ABNF\ABNF_Concatenation.cs" />
+    <Compile Remove="ABNF\ABNF_DecVal.cs" />
+    <Compile Remove="ABNF\ABNF_Element.cs" />
+    <Compile Remove="ABNF\ABNF_HexVal.cs" />
+    <Compile Remove="ABNF\ABNF_Option.cs" />
+    <Compile Remove="ABNF\ABNF_ProseVal.cs" />
+    <Compile Remove="ABNF\ABNF_Repetition.cs" />
+    <Compile Remove="ABNF\ABNF_Rule.cs" />
+    <Compile Remove="ABNF\ABNF_RuleName.cs" />
+    <Compile Remove="AssemblyInfo.cs" />
+    <Compile Remove="HTTP\Server\HTTP_Server.cs" />
+    <Compile Remove="HTTP\Server\HTTP_Session.cs" />
+    <Compile Remove="IMAP\IMAP_t_Capabilities.cs" />
+    <Compile Remove="POP3\POP3_ExtendedCapabilities.cs" />
+    <Compile Remove="SNTP\Client\SNTP_Client.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="ABNF\ABFN.cs" />
+    <None Include="ABNF\ABFN_Group.cs" />
+    <None Include="ABNF\ABNF_Alternation.cs" />
+    <None Include="ABNF\ABNF_BinVal.cs" />
+    <None Include="ABNF\ABNF_CharVal.cs" />
+    <None Include="ABNF\ABNF_Concatenation.cs" />
+    <None Include="ABNF\ABNF_DecVal.cs" />
+    <None Include="ABNF\ABNF_Element.cs" />
+    <None Include="ABNF\ABNF_HexVal.cs" />
+    <None Include="ABNF\ABNF_Option.cs" />
+    <None Include="ABNF\ABNF_ProseVal.cs" />
+    <None Include="ABNF\ABNF_Repetition.cs" />
+    <None Include="ABNF\ABNF_Rule.cs" />
+    <None Include="ABNF\ABNF_RuleName.cs" />
+    <None Include="AssemblyInfo.cs" />
+    <None Include="HTTP\Server\HTTP_Server.cs" />
+    <None Include="HTTP\Server\HTTP_Session.cs" />
+    <None Include="IMAP\IMAP_t_Capabilities.cs" />
+    <None Include="POP3\POP3_ExtendedCapabilities.cs" />
+    <None Include="SNTP\Client\SNTP_Client.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="RTP\Debug\wfrm_RTP_Debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SIP\Debug\wfrm_SIP_Debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TimerEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

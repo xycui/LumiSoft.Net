@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LumiSoft.Net</id>
+    <version>2.0.0</version>
+    <title>LumiSoft.Net</title>
+    <authors>Lumi</authors>
+    <owners>Xianyi Cui</owners>
+    <projectUrl>https://github.com/pruiz/LumiSoft.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Protocols implements</description>
+    <releaseNotes>Migrate from lumisoft source code</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Lumisoft Protocal</tags>
+  </metadata>
+</package>

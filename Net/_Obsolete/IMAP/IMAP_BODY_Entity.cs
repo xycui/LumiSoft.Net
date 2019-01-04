@@ -18,8 +18,12 @@ namespace LumiSoft.Net.IMAP
         private string                       m_ContentDescription = null;
         private string                       m_ContentEncoding    = MIME_TransferEncodings.SevenBit;
         private int                          m_ContentSize        = 0;
+#pragma warning disable 169
         private IMAP_Envelope                m_pEnvelope          = null;
+#pragma warning restore 169
+#pragma warning disable 169
         private int                          m_ContentLines       = 0;
+#pragma warning restore 169
 
         /// <summary>
         /// Default constructor.

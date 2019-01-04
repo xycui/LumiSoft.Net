@@ -18,12 +18,16 @@ namespace LumiSoft.Net
 
 
         #region Properties implementation
-
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsGlobal
         {
             get{ return false; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string PhoneNmber
         {
             get{ return ""; }

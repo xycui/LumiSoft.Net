@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if (!NETSTANDARD2_0)
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -16,7 +17,7 @@ namespace LumiSoft.Net.RTP.Debug
     /// </summary>
     public class wfrm_RTP_Debug : Form
     {
-        #region method ComboBoxItem
+#region method ComboBoxItem
 
         /// <summary>
         /// This class implements ComboBaox item.
@@ -31,14 +32,14 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             /// <param name="text">Text.</param>
             /// <param name="tag">User data.</param>
-            public ComboBoxItem(string text,object tag)
+            public ComboBoxItem(string text, object tag)
             {
                 m_Text = text;
                 m_pTag = tag;
             }
 
 
-            #region method ToString
+#region method ToString
 
             /// <summary>
             /// Returns ComboBox text.
@@ -49,17 +50,17 @@ namespace LumiSoft.Net.RTP.Debug
                 return m_Text;
             }
 
-            #endregion
+#endregion
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets text.
             /// </summary>
             public string Text
             {
-                get{ return m_Text; }
+                get { return m_Text; }
             }
 
             /// <summary>
@@ -67,15 +68,15 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public object Tag
             {
-                get{ return m_pTag; }
+                get { return m_pTag; }
             }
 
-            #endregion
+#endregion
         }
 
-        #endregion
+#endregion
 
-        #region class RTP_SessionStatistics
+#region class RTP_SessionStatistics
 
         /// <summary>
         /// This class provides data for RTP global statistic property grid.
@@ -91,7 +92,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ArgumentNullException">Is raised when <b>session</b></exception>
             public RTP_SessionStatistics(RTP_Session session)
             {
-                if(session == null){
+                if (session == null)
+                {
                     throw new ArgumentNullException("session");
                 }
 
@@ -99,14 +101,14 @@ namespace LumiSoft.Net.RTP.Debug
             }
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets total members count.
             /// </summary>
             public long Members
             {
-                get{ return m_pSession.Members.Length; }
+                get { return m_pSession.Members.Length; }
             }
 
             /// <summary>
@@ -114,7 +116,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public long Senders
             {
-                get{ return m_pSession.Senders.Length; }
+                get { return m_pSession.Senders.Length; }
             }
 
             /// <summary>
@@ -123,8 +125,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpPacketsSent
             {
-                get{
-                    return m_pSession.RtpPacketsSent; 
+                get
+                {
+                    return m_pSession.RtpPacketsSent;
                 }
             }
 
@@ -134,8 +137,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpBytesSent
             {
-                get{
-                    return m_pSession.RtpBytesSent; 
+                get
+                {
+                    return m_pSession.RtpBytesSent;
                 }
             }
 
@@ -145,8 +149,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpPacketsReceived
             {
-                get{
-                    return m_pSession.RtpPacketsReceived; 
+                get
+                {
+                    return m_pSession.RtpPacketsReceived;
                 }
             }
 
@@ -156,8 +161,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpBytesReceived
             {
-                get{
-                    return m_pSession.RtpBytesReceived; 
+                get
+                {
+                    return m_pSession.RtpBytesReceived;
                 }
             }
 
@@ -167,8 +173,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpFailedTransmissions
             {
-                get{
-                    return m_pSession.RtpFailedTransmissions; 
+                get
+                {
+                    return m_pSession.RtpFailedTransmissions;
                 }
             }
 
@@ -178,8 +185,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtcpPacketsSent
             {
-                get{
-                    return m_pSession.RtcpPacketsSent; 
+                get
+                {
+                    return m_pSession.RtcpPacketsSent;
                 }
             }
 
@@ -189,8 +197,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtcpBytesSent
             {
-                get{
-                    return m_pSession.RtcpBytesSent; 
+                get
+                {
+                    return m_pSession.RtcpBytesSent;
                 }
             }
 
@@ -200,8 +209,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtcpPacketsReceived
             {
-                get{
-                    return m_pSession.RtcpPacketsReceived; 
+                get
+                {
+                    return m_pSession.RtcpPacketsReceived;
                 }
             }
 
@@ -211,8 +221,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtcpBytesReceived
             {
-                get{
-                    return m_pSession.RtcpBytesReceived; 
+                get
+                {
+                    return m_pSession.RtcpBytesReceived;
                 }
             }
 
@@ -222,8 +233,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtcpFailedTransmissions
             {
-                get{
-                    return m_pSession.RtcpFailedTransmissions; 
+                get
+                {
+                    return m_pSession.RtcpFailedTransmissions;
                 }
             }
 
@@ -233,8 +245,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int RtcpInterval
             {
-                get{ 
-                    return m_pSession.RtcpInterval; 
+                get
+                {
+                    return m_pSession.RtcpInterval;
                 }
             }
 
@@ -244,8 +257,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public string RtcpLastTransmission
             {
-                get{
-                    return m_pSession.RtcpLastTransmission.ToString("HH:mm:ss"); 
+                get
+                {
+                    return m_pSession.RtcpLastTransmission.ToString("HH:mm:ss");
                 }
             }
 
@@ -254,8 +268,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public long LocalCollisions
             {
-                get{
-                    return m_pSession.LocalCollisions; 
+                get
+                {
+                    return m_pSession.LocalCollisions;
                 }
             }
 
@@ -264,8 +279,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public long RemoteCollisions
             {
-                get{
-                    return m_pSession.RemoteCollisions; 
+                get
+                {
+                    return m_pSession.RemoteCollisions;
                 }
             }
 
@@ -274,8 +290,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public long LocalPacketsLooped
             {
-                get{
-                    return m_pSession.LocalPacketsLooped; 
+                get
+                {
+                    return m_pSession.LocalPacketsLooped;
                 }
             }
 
@@ -284,8 +301,9 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public long RemotePacketsLooped
             {
-                get{
-                    return m_pSession.RemotePacketsLooped; 
+                get
+                {
+                    return m_pSession.RemotePacketsLooped;
                 }
             }
 
@@ -294,16 +312,19 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Payload
             {
-                get{
+                get
+                {
                     int paylaod = m_pSession.Payload;
                     Codec codec = null;
-                    m_pSession.Payloads.TryGetValue(paylaod,out codec);
+                    m_pSession.Payloads.TryGetValue(paylaod, out codec);
 
-                    if(codec == null){
+                    if (codec == null)
+                    {
                         return paylaod.ToString();
                     }
-                    else{
-                        return paylaod.ToString() + " - " + codec.Name; 
+                    else
+                    {
+                        return paylaod.ToString() + " - " + codec.Name;
                     }
                 }
             }
@@ -313,9 +334,11 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string[] Targets
             {
-                get{
+                get
+                {
                     List<string> retVal = new List<string>();
-                    foreach(RTP_Address target in m_pSession.Targets){
+                    foreach (RTP_Address target in m_pSession.Targets)
+                    {
                         retVal.Add(target.IP + ":" + target.DataPort + "/" + target.ControlPort);
                     }
 
@@ -328,7 +351,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string LocalEP
             {
-                get{
+                get
+                {
                     return m_pSession.LocalEP.IP + ":" + m_pSession.LocalEP.DataPort + "/" + m_pSession.LocalEP.ControlPort;
                 }
             }
@@ -338,18 +362,19 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string StreamMode
             {
-                get{
+                get
+                {
                     return m_pSession.StreamMode.ToString();
                 }
             }
 
-            #endregion
+#endregion
 
         }
 
-        #endregion
+#endregion
 
-        #region class RTP_ParticipantInfo
+#region class RTP_ParticipantInfo
 
         /// <summary>
         /// This class provides data for RTP participant property grid.
@@ -365,7 +390,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ArgumentNullException">Is raised when <b>participant</b> null reference.</exception>
             public RTP_ParticipantInfo(RTP_Participant participant)
             {
-                if(participant == null){
+                if (participant == null)
+                {
                     throw new ArgumentNullException("participant");
                 }
 
@@ -373,18 +399,21 @@ namespace LumiSoft.Net.RTP.Debug
             }
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets or sets the real name, eg. "John Doe". Value null means not specified.
             /// </summary>
             public string Name
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Name;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Name;
                     }
                 }
@@ -395,11 +424,14 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Email
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Email;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Email;
                     }
                 }
@@ -410,11 +442,14 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Phone
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Phone;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Phone;
                     }
                 }
@@ -426,11 +461,14 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Location
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Location;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Location;
                     }
                 }
@@ -442,11 +480,14 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Tool
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Tool;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Tool;
                     }
                 }
@@ -458,22 +499,25 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string Note
             {
-                get{
-                    if(m_pParticipant is RTP_Participant_Local){
+                get
+                {
+                    if (m_pParticipant is RTP_Participant_Local)
+                    {
                         return ((RTP_Participant_Local)m_pParticipant).Note;
                     }
-                    else{
+                    else
+                    {
                         return ((RTP_Participant_Remote)m_pParticipant).Note;
                     }
                 }
             }
 
-            #endregion
+#endregion
         }
 
-        #endregion
+#endregion
 
-        #region class RTP_SourceInfo
+#region class RTP_SourceInfo
 
         /// <summary>
         /// This class provides data for RTP "source" property grid.
@@ -489,7 +533,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ArgumentNullException">Is raised when <b>source</b> is null reference.</exception>
             public RTP_SourceInfo(RTP_Source source)
             {
-                if(source == null){
+                if (source == null)
+                {
                     throw new ArgumentNullException("source");
                 }
 
@@ -497,14 +542,14 @@ namespace LumiSoft.Net.RTP.Debug
             }
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets source state.
             /// </summary>
             public RTP_SourceState State
             {
-                get{ return m_pSource.State; }
+                get { return m_pSource.State; }
             }
 
             /// <summary>
@@ -513,7 +558,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int Session
             {
-                get{ return m_pSource.Session.GetHashCode(); }
+                get { return m_pSource.Session.GetHashCode(); }
             }
 
             /// <summary>
@@ -522,7 +567,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public uint SSRC
             {
-                get{ return m_pSource.SSRC; }
+                get { return m_pSource.SSRC; }
             }
 
             /// <summary>
@@ -531,7 +576,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public IPEndPoint RtcpEP
             {
-                get{ return m_pSource.RtcpEP; }
+                get { return m_pSource.RtcpEP; }
             }
 
             /// <summary>
@@ -540,7 +585,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public IPEndPoint RtpEP
             {
-                get{ return m_pSource.RtpEP; }
+                get { return m_pSource.RtpEP; }
             }
 
             /// <summary>
@@ -549,7 +594,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public string LastActivity
             {
-                get{ return m_pSource.LastActivity.ToString("HH:mm:ss"); }
+                get { return m_pSource.LastActivity.ToString("HH:mm:ss"); }
             }
 
             /// <summary>
@@ -558,7 +603,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public string LastRtcpPacket
             {
-                get{ return m_pSource.LastRtcpPacket.ToString("HH:mm:ss"); }
+                get { return m_pSource.LastRtcpPacket.ToString("HH:mm:ss"); }
             }
 
             /// <summary>
@@ -567,15 +612,15 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public string LastRtpPacket
             {
-                get{ return m_pSource.LastRtpPacket.ToString("HH:mm:ss"); }
+                get { return m_pSource.LastRtpPacket.ToString("HH:mm:ss"); }
             }
 
-            #endregion
+#endregion
         }
 
-        #endregion
+#endregion
 
-        #region class RTP_ReceiveStreamInfo
+#region class RTP_ReceiveStreamInfo
 
         /// <summary>
         /// This class provides data for RTP "receive stream" property grid.
@@ -590,7 +635,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// <param name="stream">RTP receive stream.</param>
             public RTP_ReceiveStreamInfo(RTP_ReceiveStream stream)
             {
-                if(stream == null){
+                if (stream == null)
+                {
                     throw new ArgumentNullException("stream");
                 }
 
@@ -598,7 +644,7 @@ namespace LumiSoft.Net.RTP.Debug
             }
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets stream owner RTP session.
@@ -606,7 +652,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int Session
             {
-                get{ return m_pStream.Session.GetHashCode(); }
+                get { return m_pStream.Session.GetHashCode(); }
             }
 
             /// <summary>
@@ -615,7 +661,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int SeqNoWrapCount
             {
-                get{ return m_pStream.SeqNoWrapCount; }
+                get { return m_pStream.SeqNoWrapCount; }
             }
 
             /// <summary>
@@ -624,7 +670,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int FirstSeqNo
             {
-                get{ return m_pStream.FirstSeqNo; }
+                get { return m_pStream.FirstSeqNo; }
             }
 
             /// <summary>
@@ -633,7 +679,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int MaxSeqNo
             {
-                get{ return m_pStream.MaxSeqNo; }
+                get { return m_pStream.MaxSeqNo; }
             }
 
             /// <summary>
@@ -642,7 +688,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long PacketsReceived
             {
-                get{ return m_pStream.PacketsReceived; }
+                get { return m_pStream.PacketsReceived; }
             }
 
             /// <summary>
@@ -651,7 +697,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long PacketsMisorder
             {
-                get{ return m_pStream.PacketsMisorder; }
+                get { return m_pStream.PacketsMisorder; }
             }
 
             /// <summary>
@@ -660,7 +706,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long BytesReceived
             {
-                get{ return m_pStream.BytesReceived; }
+                get { return m_pStream.BytesReceived; }
             }
 
             /// <summary>
@@ -669,7 +715,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long PacketsLost
             {
-                get{ return m_pStream.PacketsLost; }
+                get { return m_pStream.PacketsLost; }
             }
 
             /// <summary>
@@ -678,7 +724,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public double Jitter
             {
-                get{ return m_pStream.Jitter; }
+                get { return m_pStream.Jitter; }
             }
 
             /// <summary>
@@ -686,7 +732,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public string LastSRTime
             {
-                get{ return m_pStream.LastSRTime.ToString("HH:mm:ss"); }
+                get { return m_pStream.LastSRTime.ToString("HH:mm:ss"); }
             }
 
             /// <summary>
@@ -694,16 +740,16 @@ namespace LumiSoft.Net.RTP.Debug
             /// </summary>
             public int DelaySinceLastSR
             {
-                get{ return m_pStream.DelaySinceLastSR / 1000; }
+                get { return m_pStream.DelaySinceLastSR / 1000; }
             }
 
-            #endregion
+#endregion
 
         }
 
-        #endregion
+#endregion
 
-        #region method RTP_SendStreamInfo
+#region method RTP_SendStreamInfo
 
         /// <summary>
         /// This class provides data for RTP "send stream" property grid.
@@ -719,7 +765,8 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ArgumentNullException">Is raised when <b>stream</b> is null reference.</exception>
             public RTP_SendStreamInfo(RTP_SendStream stream)
             {
-                if(stream == null){
+                if (stream == null)
+                {
                     throw new ArgumentNullException("stream");
                 }
 
@@ -727,7 +774,7 @@ namespace LumiSoft.Net.RTP.Debug
             }
 
 
-            #region Properties implementation
+#region Properties implementation
 
             /// <summary>
             /// Gets stream owner RTP session.
@@ -735,7 +782,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int Session
             {
-                get{ return m_pStream.Session.GetHashCode(); }
+                get { return m_pStream.Session.GetHashCode(); }
             }
 
             /// <summary>
@@ -744,7 +791,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int SeqNoWrapCount
             {
-                get{ return m_pStream.SeqNoWrapCount; }
+                get { return m_pStream.SeqNoWrapCount; }
             }
 
             /// <summary>
@@ -753,7 +800,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public int SeqNo
             {
-                get{ return m_pStream.SeqNo; }
+                get { return m_pStream.SeqNo; }
             }
 
             /// <summary>
@@ -762,7 +809,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public string LastPacketTime
             {
-                get{ return m_pStream.LastPacketTime.ToString("HH:mm:ss"); }
+                get { return m_pStream.LastPacketTime.ToString("HH:mm:ss"); }
             }
 
             /// <summary>
@@ -771,7 +818,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public uint LastPacketRtpTimestamp
             {
-                get{ return m_pStream.LastPacketRtpTimestamp; }
+                get { return m_pStream.LastPacketRtpTimestamp; }
             }
 
             /// <summary>
@@ -780,7 +827,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpPacketsSent
             {
-                get{ return m_pStream.RtpPacketsSent; }
+                get { return m_pStream.RtpPacketsSent; }
             }
 
             /// <summary>
@@ -789,7 +836,7 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpBytesSent
             {
-                get{ return m_pStream.RtpBytesSent; }
+                get { return m_pStream.RtpBytesSent; }
             }
 
             /// <summary>
@@ -798,25 +845,25 @@ namespace LumiSoft.Net.RTP.Debug
             /// <exception cref="ObjectDisposedException">Is raised when this class is Disposed and this property is accessed.</exception>
             public long RtpDataBytesSent
             {
-                get{ return m_pStream.RtpDataBytesSent; }
+                get { return m_pStream.RtpDataBytesSent; }
             }
 
-            #endregion
+#endregion
         }
 
-        #endregion
+#endregion
 
-        private TabControl     m_pTab                  = null;
+        private TabControl m_pTab = null;
         private SplitContainer m_pParticipantsSplitter = null;
-        private TreeView       m_pParticipants         = null;
-        private PropertyGrid   m_pParticipantData      = null;
-        private ComboBox       m_pSessions             = null;
-        private PropertyGrid   m_pGlobalSessionInfo    = null;
-        private ListView       m_pErrors               = null;
+        private TreeView m_pParticipants = null;
+        private PropertyGrid m_pParticipantData = null;
+        private ComboBox m_pSessions = null;
+        private PropertyGrid m_pGlobalSessionInfo = null;
+        private ListView m_pErrors = null;
 
-        private bool                   m_IsDisposed = false;
-        private RTP_MultimediaSession  m_pSession   = null;
-        private Timer                  m_pTimer     = null;
+        private bool m_IsDisposed = false;
+        private RTP_MultimediaSession m_pSession = null;
+        private Timer m_pTimer = null;
 
         /// <summary>
         /// Default constructor.
@@ -824,7 +871,8 @@ namespace LumiSoft.Net.RTP.Debug
         /// <param name="session">RTP multimedia session.</param>
         public wfrm_RTP_Debug(RTP_MultimediaSession session)
         {
-            if(session == null){
+            if (session == null)
+            {
                 throw new ArgumentNullException("session");
             }
 
@@ -847,24 +895,26 @@ namespace LumiSoft.Net.RTP.Debug
             m_pTimer.Tick += new EventHandler(m_pTimer_Tick);
             m_pTimer.Enabled = true;
 
-            foreach(RTP_Session s in m_pSession.Sessions){
-                ComboBoxItem item = new ComboBoxItem("Session: " + s.GetHashCode(),new RTP_SessionStatistics(s));
+            foreach (RTP_Session s in m_pSession.Sessions)
+            {
+                ComboBoxItem item = new ComboBoxItem("Session: " + s.GetHashCode(), new RTP_SessionStatistics(s));
                 m_pSessions.Items.Add(item);
             }
-            if(m_pSessions.Items.Count > 0){
+            if (m_pSessions.Items.Count > 0)
+            {
                 m_pSessions.SelectedIndex = 0;
             }
         }
 
-                                                
-        #region method InitUI
+
+#region method InitUI
 
         /// <summary>
         /// Creates and initializes UI.
         /// </summary>
         private void InitUI()
         {
-            this.ClientSize = new Size(400,500);
+            this.ClientSize = new Size(400, 500);
             this.Text = "RTP debug";
             //this.Icon = ; TODO:
             this.FormClosing += new FormClosingEventHandler(wfrm_RTP_Debug_FormClosing);
@@ -872,14 +922,14 @@ namespace LumiSoft.Net.RTP.Debug
             m_pTab = new TabControl();
             m_pTab.Dock = DockStyle.Fill;
 
-            m_pTab.TabPages.Add("participants","Participants");
+            m_pTab.TabPages.Add("participants", "Participants");
 
             m_pParticipantsSplitter = new SplitContainer();
             m_pParticipantsSplitter.Dock = DockStyle.Fill;
             m_pParticipantsSplitter.Orientation = Orientation.Vertical;
             m_pParticipantsSplitter.SplitterDistance = 60;
             m_pTab.TabPages["participants"].Controls.Add(m_pParticipantsSplitter);
-            
+
             m_pParticipants = new TreeView();
             m_pParticipants.Dock = DockStyle.Fill;
             m_pParticipants.BorderStyle = BorderStyle.None;
@@ -896,247 +946,276 @@ namespace LumiSoft.Net.RTP.Debug
             m_pParticipantData.Dock = DockStyle.Fill;
             m_pParticipantsSplitter.Panel2.Controls.Add(m_pParticipantData);
 
-            m_pTab.TabPages.Add("global_statistics","Global statistics");
+            m_pTab.TabPages.Add("global_statistics", "Global statistics");
 
             m_pGlobalSessionInfo = new PropertyGrid();
             m_pGlobalSessionInfo.Dock = DockStyle.Fill;
             m_pTab.TabPages["global_statistics"].Controls.Add(m_pGlobalSessionInfo);
 
             m_pSessions = new ComboBox();
-            m_pSessions.Size = new Size(200,20);
-            m_pSessions.Location = new Point(100,2);
+            m_pSessions.Size = new Size(200, 20);
+            m_pSessions.Location = new Point(100, 2);
             m_pSessions.DropDownStyle = ComboBoxStyle.DropDownList;
             m_pSessions.SelectedIndexChanged += new EventHandler(m_pSessions_SelectedIndexChanged);
             m_pTab.TabPages["global_statistics"].Controls.Add(m_pSessions);
             m_pSessions.BringToFront();
 
-            m_pTab.TabPages.Add("errors","Errors");
+            m_pTab.TabPages.Add("errors", "Errors");
 
             m_pErrors = new ListView();
             m_pErrors.Dock = DockStyle.Fill;
             m_pErrors.View = View.Details;
             m_pErrors.FullRowSelect = true;
             m_pErrors.HideSelection = false;
-            m_pErrors.Columns.Add("Message",300);
+            m_pErrors.Columns.Add("Message", 300);
             m_pErrors.DoubleClick += new EventHandler(m_pErrors_DoubleClick);
             m_pTab.TabPages["errors"].Controls.Add(m_pErrors);
 
             this.Controls.Add(m_pTab);
         }
-                                                                
-        #endregion
+
+#endregion
 
 
-        #region Events handling
+#region Events handling
 
-        #region method m_pParticipants_AfterSelect
-                
-        private void m_pParticipants_AfterSelect(object sender,TreeViewEventArgs e)
+#region method m_pParticipants_AfterSelect
+
+        private void m_pParticipants_AfterSelect(object sender, TreeViewEventArgs e)
         {
             m_pParticipantData.SelectedObject = e.Node.Tag;
         }
 
-        #endregion
+#endregion
 
-        #region method m_pSessions_SelectedIndexChanged
+#region method m_pSessions_SelectedIndexChanged
 
-        private void m_pSessions_SelectedIndexChanged(object sender,EventArgs e)
+        private void m_pSessions_SelectedIndexChanged(object sender, EventArgs e)
         {
             m_pGlobalSessionInfo.SelectedObject = ((ComboBoxItem)m_pSessions.SelectedItem).Tag;
         }
 
-        #endregion
+#endregion
 
-        #region method m_pErrors_DoubleClick
+#region method m_pErrors_DoubleClick
 
-        private void m_pErrors_DoubleClick(object sender,EventArgs e)
+        private void m_pErrors_DoubleClick(object sender, EventArgs e)
         {
-            if(m_pErrors.SelectedItems.Count > 0){
-                MessageBox.Show(this,"Error: " + ((Exception)m_pErrors.SelectedItems[0].Tag).ToString(),"Error:",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            if (m_pErrors.SelectedItems.Count > 0)
+            {
+                MessageBox.Show(this, "Error: " + ((Exception)m_pErrors.SelectedItems[0].Tag).ToString(), "Error:", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        #endregion
+#endregion
 
 
-        #region method m_pSession_Error
+#region method m_pSession_Error
 
         /// <summary>
         /// Is called when RTP session gets unhandled error.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void m_pSession_Error(object sender,LumiSoft.Net.ExceptionEventArgs e)
+        private void m_pSession_Error(object sender, LumiSoft.Net.ExceptionEventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 ListViewItem item = new ListViewItem(e.Exception.Message);
                 item.Tag = e.Exception;
                 m_pErrors.Items.Add(item);
             }));
         }
 
-        #endregion
+#endregion
 
-        #region method m_pSession_SessionCreated
+#region method m_pSession_SessionCreated
 
         /// <summary>
         /// Is called when RTP multimedia session creates new session.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void m_pSession_SessionCreated(object sender,EventArgs<RTP_Session> e)
+        private void m_pSession_SessionCreated(object sender, EventArgs<RTP_Session> e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
-                ComboBoxItem item = new ComboBoxItem("Session: " + e.Value.GetHashCode(),new RTP_SessionStatistics(e.Value));
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
+                ComboBoxItem item = new ComboBoxItem("Session: " + e.Value.GetHashCode(), new RTP_SessionStatistics(e.Value));
                 m_pSessions.Items.Add(item);
 
-                if(m_pSessions.Items.Count > 0){
+                if (m_pSessions.Items.Count > 0)
+                {
                     m_pSessions.SelectedIndex = 0;
                 }
             }));
         }
 
-        #endregion
+#endregion
 
-        #region method m_pSession_NewParticipant
+#region method m_pSession_NewParticipant
 
         /// <summary>
         /// This method is called when RTP session sees new remote participant.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void m_pSession_NewParticipant(object sender,RTP_ParticipantEventArgs e)
+        private void m_pSession_NewParticipant(object sender, RTP_ParticipantEventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             e.Participant.Removed += new EventHandler(Participant_Removed);
             e.Participant.SourceAdded += new EventHandler<RTP_SourceEventArgs>(Participant_SourceAdded);
             e.Participant.SourceRemoved += new EventHandler<RTP_SourceEventArgs>(Participant_SourceRemoved);
-            
+
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 TreeNode nodeParticipant = new TreeNode(e.Participant.CNAME);
                 nodeParticipant.Tag = new RTP_ParticipantInfo(e.Participant);
                 nodeParticipant.Nodes.Add("Sources");
                 m_pParticipants.Nodes.Add(nodeParticipant);
             }));
         }
-                                                
-        #endregion
 
-        #region method Participant_Removed
+#endregion
+
+#region method Participant_Removed
 
         /// <summary>
         /// This method is called when RTP remote participant has disjoined the multimedia session.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void Participant_Removed(object sender,EventArgs e)
+        private void Participant_Removed(object sender, EventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 TreeNode nodeParticipant = FindParticipantNode((RTP_Participant)sender);
-                if(nodeParticipant != null){
+                if (nodeParticipant != null)
+                {
                     nodeParticipant.Remove();
                 }
             }));
         }
 
-        #endregion
+#endregion
 
-        #region method Participant_SourceAdded
+#region method Participant_SourceAdded
 
         /// <summary>
         /// This method is called when participant creates new source. 
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void Participant_SourceAdded(object sender,RTP_SourceEventArgs e)
+        private void Participant_SourceAdded(object sender, RTP_SourceEventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             e.Source.StateChanged += new EventHandler(Source_StateChanged);
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 TreeNode nodeParticipant = null;
-                if(e.Source is RTP_Source_Remote){
+                if (e.Source is RTP_Source_Remote)
+                {
                     nodeParticipant = FindParticipantNode(((RTP_Source_Remote)e.Source).Participant);
                 }
-                else{
+                else
+                {
                     nodeParticipant = FindParticipantNode(((RTP_Source_Local)e.Source).Participant);
                 }
                 TreeNode nodeSource = nodeParticipant.Nodes[0].Nodes.Add(e.Source.SSRC.ToString());
                 nodeSource.Tag = new RTP_SourceInfo(e.Source);
 
-                if(e.Source.State == RTP_SourceState.Active){
+                if (e.Source.State == RTP_SourceState.Active)
+                {
                     TreeNode nodeSourceStream = nodeSource.Nodes.Add("RTP Stream");
-                    if(e.Source is RTP_Source_Local){
+                    if (e.Source is RTP_Source_Local)
+                    {
                         nodeSourceStream.Tag = new RTP_SendStreamInfo(((RTP_Source_Local)e.Source).Stream);
                     }
-                    else{
+                    else
+                    {
                         nodeSourceStream.Tag = new RTP_ReceiveStreamInfo(((RTP_Source_Remote)e.Source).Stream);
                     }
                 }
             }));
         }
-                                
-        #endregion
 
-        #region method Source_StateChanged
+#endregion
+
+#region method Source_StateChanged
 
         /// <summary>
         /// This method is called when participant source state changes.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void Source_StateChanged(object sender,EventArgs e)
+        private void Source_StateChanged(object sender, EventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
             RTP_Source source = (RTP_Source)sender;
-            if(source.State == RTP_SourceState.Disposed){
+            if (source.State == RTP_SourceState.Disposed)
+            {
                 return;
             }
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 TreeNode nodeParticipant = null;
-                if(source is RTP_Source_Remote){
+                if (source is RTP_Source_Remote)
+                {
                     nodeParticipant = FindParticipantNode(((RTP_Source_Remote)source).Participant);
                 }
-                else{
+                else
+                {
                     nodeParticipant = FindParticipantNode(((RTP_Source_Local)source).Participant);
                 }
-                if(nodeParticipant != null){
-                    foreach(TreeNode nodeSource in nodeParticipant.Nodes[0].Nodes){
-                        if(nodeSource.Text == source.SSRC.ToString()){                            
-                            if(source.State == RTP_SourceState.Active){
+                if (nodeParticipant != null)
+                {
+                    foreach (TreeNode nodeSource in nodeParticipant.Nodes[0].Nodes)
+                    {
+                        if (nodeSource.Text == source.SSRC.ToString())
+                        {
+                            if (source.State == RTP_SourceState.Active)
+                            {
                                 TreeNode nodeSourceStream = nodeSource.Nodes.Add("RTP Stream");
-                                if(source is RTP_Source_Local){
+                                if (source is RTP_Source_Local)
+                                {
                                     nodeSourceStream.Tag = new RTP_SendStreamInfo(((RTP_Source_Local)source).Stream);
                                 }
-                                else{
+                                else
+                                {
                                     nodeSourceStream.Tag = new RTP_ReceiveStreamInfo(((RTP_Source_Remote)source).Stream);
                                 }
                             }
@@ -1148,18 +1227,19 @@ namespace LumiSoft.Net.RTP.Debug
             }));
         }
 
-        #endregion
+#endregion
 
-        #region method Participant_SourceRemoved
+#region method Participant_SourceRemoved
 
         /// <summary>
         /// This method is called when participant closes source.
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void Participant_SourceRemoved(object sender,RTP_SourceEventArgs e)
+        private void Participant_SourceRemoved(object sender, RTP_SourceEventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
@@ -1167,11 +1247,15 @@ namespace LumiSoft.Net.RTP.Debug
             uint ssrc = e.Source.SSRC;
 
             // Move processing to UI thread.
-            this.BeginInvoke(new MethodInvoker(delegate(){
+            this.BeginInvoke(new MethodInvoker(delegate ()
+            {
                 TreeNode nodeParticipant = FindParticipantNode((RTP_Participant)sender);
-                if(nodeParticipant != null){
-                    foreach(TreeNode nodeSource in nodeParticipant.Nodes[0].Nodes){
-                        if(nodeSource.Text == ssrc.ToString()){
+                if (nodeParticipant != null)
+                {
+                    foreach (TreeNode nodeSource in nodeParticipant.Nodes[0].Nodes)
+                    {
+                        if (nodeSource.Text == ssrc.ToString())
+                        {
                             nodeSource.Remove();
                             break;
                         }
@@ -1180,16 +1264,18 @@ namespace LumiSoft.Net.RTP.Debug
             }));
         }
 
-        #endregion
+#endregion
 
-        #region method m_pTimer_Tick
+#region method m_pTimer_Tick
 
-        private void m_pTimer_Tick(object sender,EventArgs e)
+        private void m_pTimer_Tick(object sender, EventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
-            if(m_pSession.IsDisposed){
+            if (m_pSession.IsDisposed)
+            {
                 this.Visible = false;
                 return;
             }
@@ -1198,11 +1284,11 @@ namespace LumiSoft.Net.RTP.Debug
             m_pGlobalSessionInfo.Refresh();
         }
 
-        #endregion
+#endregion
 
-        #region method wfrm_RTP_Debug_FormClosing
+#region method wfrm_RTP_Debug_FormClosing
 
-        private void wfrm_RTP_Debug_FormClosing(object sender,FormClosingEventArgs e)
+        private void wfrm_RTP_Debug_FormClosing(object sender, FormClosingEventArgs e)
         {
             m_IsDisposed = true;
 
@@ -1215,12 +1301,12 @@ namespace LumiSoft.Net.RTP.Debug
             m_pTimer.Dispose();
         }
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
 
-        #region FindParticipantNode
+#region FindParticipantNode
 
         /// <summary>
         /// Searches specified participant tree node.
@@ -1229,12 +1315,15 @@ namespace LumiSoft.Net.RTP.Debug
         /// <returns>Returns specified participant tree node or null if no matching node.</returns>
         private TreeNode FindParticipantNode(RTP_Participant participant)
         {
-            if(participant == null){
+            if (participant == null)
+            {
                 throw new ArgumentNullException("participant");
             }
 
-            foreach(TreeNode node in m_pParticipants.Nodes){
-                if(node.Text == participant.CNAME){
+            foreach (TreeNode node in m_pParticipants.Nodes)
+            {
+                if (node.Text == participant.CNAME)
+                {
                     return node;
                 }
             }
@@ -1242,20 +1331,22 @@ namespace LumiSoft.Net.RTP.Debug
             return null;
         }
 
-        #endregion
+#endregion
 
 
-        #region Properties implementation
+#region Properties implementation
 
         /// <summary>
         /// Gets RTP session what UI debugs.
         /// </summary>
         public RTP_MultimediaSession Session
         {
-            get{ return m_pSession; }
+            get { return m_pSession; }
         }
 
-        #endregion
+#endregion
 
     }
 }
+
+#endif

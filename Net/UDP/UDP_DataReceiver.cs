@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-using LumiSoft.Net;
 
 namespace LumiSoft.Net.UDP
 {
@@ -15,13 +12,13 @@ namespace LumiSoft.Net.UDP
     /// <remarks>NOTE: High performance server applications should create multiple instances of this class per one socket.</remarks>
     public class UDP_DataReceiver : IDisposable
     {
-        private bool                 m_IsDisposed  = false;
-        private bool                 m_IsRunning   = false;
-        private Socket               m_pSocket     = null;
-        private byte[]               m_pBuffer     = null;
-        private int                  m_BufferSize  = 1400;
+        private bool m_IsDisposed = false;
+        private bool m_IsRunning = false;
+        private Socket m_pSocket = null;
+        private byte[] m_pBuffer = null;
+        private int m_BufferSize = 60 * 1024;
         private SocketAsyncEventArgs m_pSocketArgs = null;
-        private UDP_e_PacketReceived m_pEventArgs  = null;
+        private UDP_e_PacketReceived m_pEventArgs = null;
 
         /// <summary>
         /// Default constructor.
@@ -30,7 +27,8 @@ namespace LumiSoft.Net.UDP
         /// <exception cref="ArgumentNullException">Is raised when <b>socket</b> is null reference.</exception>
         public UDP_DataReceiver(Socket socket)
         {
-            if(socket == null){
+            if (socket == null)
+            {
                 throw new ArgumentNullException("socket");
             }
 
@@ -44,21 +42,23 @@ namespace LumiSoft.Net.UDP
         /// </summary>
         public void Dispose()
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
             m_IsDisposed = true;
 
             m_pSocket = null;
             m_pBuffer = null;
-            if(m_pSocketArgs != null){
+            if (m_pSocketArgs != null)
+            {
                 m_pSocketArgs.Dispose();
                 m_pSocketArgs = null;
             }
             m_pEventArgs = null;
 
             this.PacketReceived = null;
-            this.Error = null;            
+            this.Error = null;
         }
 
         #endregion
@@ -72,56 +72,70 @@ namespace LumiSoft.Net.UDP
         /// <exception cref="ObjectDisposedException">Is raised when this calss is disposed and this method is accessed.</exception>
         public void Start()
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 throw new ObjectDisposedException(this.GetType().Name);
             }
-            if(m_IsRunning){
+            if (m_IsRunning)
+            {
                 return;
             }
             m_IsRunning = true;
-            
+
             bool isIoCompletionSupported = Net_Utils.IsSocketAsyncSupported();
 
             m_pEventArgs = new UDP_e_PacketReceived();
             m_pBuffer = new byte[m_BufferSize];
-            
-            if(isIoCompletionSupported){
+
+            if (isIoCompletionSupported)
+            {
                 m_pSocketArgs = new SocketAsyncEventArgs();
-                m_pSocketArgs.SetBuffer(m_pBuffer,0,m_BufferSize);
-                m_pSocketArgs.RemoteEndPoint = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any,0);
-                m_pSocketArgs.Completed += delegate(object s1,SocketAsyncEventArgs e1){
-                    if(m_IsDisposed){
+                m_pSocketArgs.SetBuffer(m_pBuffer, 0, m_BufferSize);
+                m_pSocketArgs.RemoteEndPoint = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any, 0);
+                m_pSocketArgs.Completed += delegate(object s1, SocketAsyncEventArgs e1)
+                {
+                    if (m_IsDisposed)
+                    {
                         return;
                     }
 
-                    try{
-                        if(m_pSocketArgs.SocketError == SocketError.Success){
-                            OnPacketReceived(m_pBuffer,m_pSocketArgs.BytesTransferred,(IPEndPoint)m_pSocketArgs.RemoteEndPoint);                            
+                    try
+                    {
+                        if (m_pSocketArgs.SocketError == SocketError.Success)
+                        {
+                            OnPacketReceived(m_pBuffer, m_pSocketArgs.BytesTransferred, (IPEndPoint)m_pSocketArgs.RemoteEndPoint);
                         }
-                        else{
+                        else
+                        {
                             OnError(new Exception("Socket error '" + m_pSocketArgs.SocketError + "'."));
                         }
 
                         IOCompletionReceive();
                     }
-                    catch(Exception x){
+                    catch (Exception x)
+                    {
                         OnError(x);
                     }
                 };
             }
 
             // Move processing to thread pool.
-            ThreadPool.QueueUserWorkItem(delegate(object state){
-                if(m_IsDisposed){
+            ThreadPool.QueueUserWorkItem(delegate(object state)
+            {
+                if (m_IsDisposed)
+                {
                     return;
                 }
 
-                try{ 
-                    if(isIoCompletionSupported){                        
+                try
+                {
+                    if (isIoCompletionSupported)
+                    {
                         IOCompletionReceive();
                     }
-                    else{
-                        EndPoint rtpRemoteEP = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any,0);
+                    else
+                    {
+                        EndPoint rtpRemoteEP = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any, 0);
                         m_pSocket.BeginReceiveFrom(
                             m_pBuffer,
                             0,
@@ -133,7 +147,8 @@ namespace LumiSoft.Net.UDP
                         );
                     }
                 }
-                catch(Exception x){
+                catch (Exception x)
+                {
                     OnError(x);
                 }
             });
@@ -149,27 +164,34 @@ namespace LumiSoft.Net.UDP
         /// </summary>
         private void IOCompletionReceive()
         {
-            try{ 
+            try
+            {
                 // Use active worker thread as long as ReceiveFromAsync completes synchronously.
                 // (With this approach we don't have thread context switches while ReceiveFromAsync completes synchronously)
-                while(!m_IsDisposed && !m_pSocket.ReceiveFromAsync(m_pSocketArgs)){
-                    if(m_pSocketArgs.SocketError == SocketError.Success){
-                        try{
-                            OnPacketReceived(m_pBuffer,m_pSocketArgs.BytesTransferred,(IPEndPoint)m_pSocketArgs.RemoteEndPoint);
+                while (!m_IsDisposed && !m_pSocket.ReceiveFromAsync(m_pSocketArgs))
+                {
+                    if (m_pSocketArgs.SocketError == SocketError.Success)
+                    {
+                        try
+                        {
+                            OnPacketReceived(m_pBuffer, m_pSocketArgs.BytesTransferred, (IPEndPoint)m_pSocketArgs.RemoteEndPoint);
                         }
-                        catch(Exception x){
+                        catch (Exception x)
+                        {
                             OnError(x);
                         }
                     }
-                    else{
+                    else
+                    {
                         OnError(new Exception("Socket error '" + m_pSocketArgs.SocketError + "'."));
                     }
 
                     // Reset remote end point.
-                    m_pSocketArgs.RemoteEndPoint = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any,0);
+                    m_pSocketArgs.RemoteEndPoint = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any, 0);
                 }
             }
-            catch(Exception x){
+            catch (Exception x)
+            {
                 OnError(x);
             }
         }
@@ -184,23 +206,27 @@ namespace LumiSoft.Net.UDP
         /// <param name="ar">The result of the asynchronous operation.</param>
         private void AsyncSocketReceive(IAsyncResult ar)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
-            try{
-                EndPoint remoteEP = new IPEndPoint(IPAddress.Any,0);
-                int count = m_pSocket.EndReceiveFrom(ar,ref remoteEP);
+            try
+            {
+                EndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
+                int count = m_pSocket.EndReceiveFrom(ar, ref remoteEP);
 
-                OnPacketReceived(m_pBuffer,count,(IPEndPoint)remoteEP);
+                OnPacketReceived(m_pBuffer, count, (IPEndPoint)remoteEP);
             }
-            catch(Exception x){
+            catch (Exception x)
+            {
                 OnError(x);
             }
 
-            try{
+            try
+            {
                 // Start receiving new packet.
-                EndPoint rtpRemoteEP = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any,0);
+                EndPoint rtpRemoteEP = new IPEndPoint(m_pSocket.AddressFamily == AddressFamily.InterNetwork ? IPAddress.Any : IPAddress.IPv6Any, 0);
                 m_pSocket.BeginReceiveFrom(
                     m_pBuffer,
                     0,
@@ -211,8 +237,9 @@ namespace LumiSoft.Net.UDP
                     null
                 );
             }
-            catch(Exception x){
-                 OnError(x);
+            catch (Exception x)
+            {
+                OnError(x);
             }
         }
 
@@ -234,12 +261,13 @@ namespace LumiSoft.Net.UDP
         /// <param name="buffer">Data buffer.</param>
         /// <param name="count">Number of bytes stored in <b>buffer</b></param>
         /// <param name="remoteEP">Remote IP end point from where data was received.</param>
-        private void OnPacketReceived(byte[] buffer,int count,IPEndPoint remoteEP)
+        private void OnPacketReceived(byte[] buffer, int count, IPEndPoint remoteEP)
         {
-            if(this.PacketReceived != null){
-                m_pEventArgs.Reuse(m_pSocket,buffer,count,remoteEP);
+            if (this.PacketReceived != null)
+            {
+                m_pEventArgs.Reuse(m_pSocket, buffer, count, remoteEP);
 
-                this.PacketReceived(this,m_pEventArgs);
+                this.PacketReceived(this, m_pEventArgs);
             }
         }
 
@@ -258,12 +286,14 @@ namespace LumiSoft.Net.UDP
         /// <param name="x">Exception happened.</param>
         private void OnError(Exception x)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
-            if(this.Error != null){
-                this.Error(this,new ExceptionEventArgs(x));
+            if (this.Error != null)
+            {
+                this.Error(this, new ExceptionEventArgs(x));
             }
         }
 
